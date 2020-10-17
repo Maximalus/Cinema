@@ -6,13 +6,14 @@ public class Seance {
 	private Time timeOfFinish;
 
 	public Seance(Movie movie, Time timeOfStart) {
-		super();
 		this.movie = movie;
 		this.timeOfStart = timeOfStart;
-		if(movie.getDuration().getMin()+timeOfStart.getMin()>59) {
-			this.timeOfFinish=new Time((movie.getDuration().getHour()+timeOfStart.getHour()+1), (movie.getDuration().getMin()+timeOfStart.getMin()));
+		if(movie.getDuration().getMinute()+timeOfStart.getMinute()>59) {
+			this.timeOfFinish= new Time((movie.getDuration().getHour()+timeOfStart.getHour()+1),
+					(movie.getDuration().getMinute()+timeOfStart.getMinute()));
 		}else {
-			this.timeOfFinish=new Time((movie.getDuration().getHour()+timeOfStart.getHour()), (movie.getDuration().getMin()+timeOfStart.getMin()));
+			this.timeOfFinish=new Time((movie.getDuration().getHour()+timeOfStart.getHour()),
+					(movie.getDuration().getMinute()+timeOfStart.getMinute()));
 		}
 	}
 
@@ -70,11 +71,8 @@ public class Seance {
 		} else if (!timeOfFinish.equals(other.timeOfFinish))
 			return false;
 		if (timeOfStart == null) {
-			if (other.timeOfStart != null)
-				return false;
-		} else if (!timeOfStart.equals(other.timeOfStart))
-			return false;
-		return true;
+			return other.timeOfStart == null;
+		} else return timeOfStart.equals(other.timeOfStart);
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package com.maximalus.model;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
 public class Cinema {
@@ -11,7 +9,6 @@ public class Cinema {
 	Scanner scanner = new Scanner(System.in);
 
 	public Cinema() {
-
 	}
 
 	public Cinema(String nameOfCinema, Time openTime, Time closeTime) {
@@ -75,66 +72,13 @@ public class Cinema {
 		} else if (!nameOfCinema.equals(other.nameOfCinema))
 			return false;
 		if (openTime == null) {
-			if (other.openTime != null)
-				return false;
-		} else if (!openTime.equals(other.openTime))
-			return false;
-		return true;
+			return other.openTime == null;
+		} else return openTime.equals(other.openTime);
 	}
 
 	@Override
 	public String toString() {
 		return "Cinema [nameOfCinema=" + nameOfCinema + ", openTime=" + openTime + ", closeTime=" + closeTime + "]";
-	}
-
-	public void addCinema(List<Cinema>list) {
-		System.out.println("Введіть назву кінотеатру");
-		String nameOfCinema = scanner.next();
-		System.out.println("Введіть час відкриття кінотеатру у годинах");
-		int hourOpen = scanner.nextInt();
-		System.out.println("Введіть час відкриття кінотеатру у хвилинах");
-		int minOpen = scanner.nextInt();
-		System.out.println("Введіть час закриття кінотеатру у годинах");
-		int hourClose = scanner.nextInt();
-		System.out.println("Введіть час закриття кінотеатру у хвилинах");
-		int minClose = scanner.nextInt();
-		list.add(new Cinema(nameOfCinema, new Time(hourOpen, minOpen), new Time(hourClose, minClose)));
-		System.out.println("Кінотеатр " + nameOfCinema + " доданий до бази данних. " + "Час відкриття " + hourOpen + " год." + minOpen + " хв."
-				+ " Час закриття " + hourClose + " год." + minClose + " хв.");
-	}
-
-	public void removeCinema(List<Cinema>list, List<Schedule>list2) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.println("Введіть назву кінотеатру");
-		String nameOfCinema = scanner.next();
-
-		Iterator<Cinema> iterator = list.iterator();
-		while(iterator.hasNext()) {
-			Cinema next = iterator.next();
-			if(next.getNameOfCinema().equals(nameOfCinema)) {
-				iterator.remove();
-				System.out.println("Кінотеатр " + nameOfCinema + " був видалений з бази данних кінотеатрів");
-			}
-		}
-
-		Iterator<Schedule> iterator2 = list2.iterator();
-		while(iterator2.hasNext()) {
-			Schedule next = iterator2.next();
-			if(next.getCinema().getNameOfCinema().equals(nameOfCinema)) {
-				iterator2.remove();
-				System.out.println("Кінотеатр " + nameOfCinema + " був видалений з бази данних сеансів");
-			}
-		}
-	}
-
-	public void showAllCinemas(List<Cinema>list) {
-		Iterator<Cinema> iterator = list.iterator();
-		while(iterator.hasNext()) {
-			Cinema next = iterator.next();
-			if(next!=null) {
-				System.out.println("Кінотеатр " + next.getNameOfCinema() + " існує в базі данних");
-			}
-		}
 	}
 }
 

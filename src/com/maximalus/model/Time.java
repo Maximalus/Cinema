@@ -2,16 +2,16 @@ package com.maximalus.model;
 
 public class Time {
 	private int hour;
-	private int min;
+	private int minute;
 
-	public Time(int hour, int min) {
+	public Time(int hour, int minute) {
 		if(hour<=23) {
 			this.hour = hour;
 		}else {
 			System.out.println("Помилка вводу");
 		}
-		if(min<=59) {
-			this.min=min;
+		if(minute<=59) {
+			this.minute=minute;
 		}else {
 			System.out.println("Помилка вводу");
 		}
@@ -26,12 +26,12 @@ public class Time {
 		this.hour = hour;
 	}
 
-	public int getMin() {
-		return min;
+	public int getMinute() {
+		return minute;
 	}
 
-	public void setMin(int min) {
-		this.min = min;
+	public void setMinute(int minute) {
+		this.minute = minute;
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class Time {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + hour;
-		result = prime * result + min;
+		result = prime * result + minute;
 		return result;
 	}
 
@@ -54,13 +54,11 @@ public class Time {
 		Time other = (Time) obj;
 		if (hour != other.hour)
 			return false;
-		if (min != other.min)
-			return false;
-		return true;
+		return minute == other.minute;
 	}
 
 	@Override
 	public String toString() {
-		return "Time [hour=" + hour + ", min=" + min + "]";
+		return "Time [hour=" + hour + ", minute=" + minute + "]";
 	}
 }

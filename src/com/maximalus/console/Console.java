@@ -1,22 +1,27 @@
 package com.maximalus.console;
 
+import com.maximalus.dao.CinemaDao;
+import com.maximalus.dao.MovieDao;
+import com.maximalus.dao.ScheduleDao;
 import com.maximalus.model.Cinema;
 import com.maximalus.model.Movie;
 import com.maximalus.model.Schedule;
+import com.maximalus.model.Seance;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Console {
-	Scanner scanner = new Scanner(System.in);
-	Schedule schedule = new Schedule();
-	Cinema cinema = new Cinema();
-	Movie movie = new Movie();
+	private Scanner scanner = new Scanner(System.in);
+	private ScheduleDao scheduleDao = new ScheduleDao();
+	private CinemaDao cinemaDao = new CinemaDao();
+	private MovieDao movieDao = new MovieDao();
 
-	List<Movie>movieList = new ArrayList();
-	List<Schedule>scheduleList = new ArrayList();
-	List<Cinema>cinemaList = new ArrayList();
+	private List<Movie>movieList = new ArrayList();
+	private List<Schedule>scheduleList = new ArrayList();
+	private List<Cinema>cinemaList = new ArrayList();
+	private List<Seance> seanceList = new ArrayList<>();
 
 	public void mainText() {
 		System.out.println("Введіть номер необхідної команди");
@@ -39,78 +44,77 @@ public class Console {
 		switch(choise) {
 			case 1:
 				System.out.println("-------------------");
-				cinema.addCinema(cinemaList);
+				cinemaDao.addCinema(cinemaList);
 				System.out.println("-------------------");
 				System.out.println();
 				mainText();
 				break;
 			case 2:
 				System.out.println("-------------------");
-				movie.addMovie(movieList);
+				movieDao.addMovie(movieList);
 				System.out.println("-------------------");
 				System.out.println();
 				mainText();
 				break;
 			case 3:
 				System.out.println("-------------------");
-				schedule.addSeance(scheduleList, movieList, cinemaList);
+				scheduleDao.addSeance(cinemaList, movieList, scheduleList);
 				System.out.println("-------------------");
 				System.out.println();
 				mainText();
 				break;
 			case 4:
 				System.out.println("-------------------");
-				cinema.removeCinema(cinemaList, scheduleList);
+				cinemaDao.removeCinema(cinemaList, scheduleList);
 				System.out.println("-------------------");
 				System.out.println();
 				mainText();
 				break;
 			case 5:
 				System.out.println("-------------------");
-				System.out.println("Фільм був видалений з усіх кінотеатрів");
-				schedule.removeMovieFromExactCinema(scheduleList);
+				scheduleDao.removeMovieFromExactCinema(scheduleList);
 				System.out.println("-------------------");
 				System.out.println();
 				mainText();
 				break;
 			case 6:
 				System.out.println("-------------------");
-				schedule.removeMovieFromAllSchedule(scheduleList);
+				scheduleDao.removeMovieFromAllSchedules(scheduleList);
 				System.out.println("-------------------");
 				System.out.println();
 				mainText();
 				break;
 			case 7:
 				System.out.println("-------------------");
-				schedule.removeSeanceInExactDay(scheduleList);
+				scheduleDao.removeSeanceInExactDay(scheduleList);
 				System.out.println("-------------------");
 				System.out.println();
 				mainText();
 				break;
 			case 8:
 				System.out.println("-------------------");
-				movie.removeMovieFromBaseAndAllListes(movieList, scheduleList);
+				movieDao.removeMovie(movieList, scheduleList);
 				System.out.println("-------------------");
 				System.out.println();
 				mainText();
 				break;
 			case 9:
 				System.out.println("-------------------");
-				cinema.showAllCinemas(cinemaList);
+				cinemaDao.showAllCinemas(cinemaList);
 				System.out.println("-------------------");
 				System.out.println();
 				mainText();
 				break;
 			case 10:
 				System.out.println("-------------------");
-				movie.showListOfAllMovies(movieList);
+				movieDao.showAllMovies(movieList);
 				System.out.println("-------------------");
 				System.out.println();
 				mainText();
 				break;
 			case 11:
 				System.out.println("-------------------");
-				schedule.showAllSeances(scheduleList);
+				scheduleDao.showAllSeances(scheduleList);
 				System.out.println("-------------------");
 				System.out.println();
 				mainText();
